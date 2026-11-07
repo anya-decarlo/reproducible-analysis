@@ -1,0 +1,20 @@
+{
+  "inputs": [
+    {
+      "bytes": 4272214,
+      "cached": false,
+      "file": "CIK0000320193_AAPL.json",
+      "sha256": "918719c14ea66b5c78e0da7daed5ff8a62fab20c19ec37e74615e2b2233eae74",
+      "source": "../sec-data-quality/data/raw/CIK0000320193_AAPL.json",
+      "ticker": "AAPL"
+    },
+    {
+      "bytes": 5472275,
+      "cached": false,
+      "file": "CIK0000789019_MSFT.json",
+      "sha256": "11071048a9cf1d23d9804f1a1c18783e8a6d50586e857c1e8a8bcce9081ddad6",
+      "source": "../sec-data-quality/data/raw/CIK0000789019_MSFT.json",
+      "ticker": "MSFT"
+    }
+  ]
+}

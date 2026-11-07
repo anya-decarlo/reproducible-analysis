@@ -1,0 +1,40 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # unit tests first — cheap, fast failure
+      - name: Unit tests
+        run: make test
+
+      # full pipeline: ingest hits EDGAR live; validation gates the run
+      - name: Run pipeline
+        run: make ingest transform analyze validate
+
+      # reproducibility proof: recompute and compare hashes
+      - name: Verify reproducibility
+        run: make verify
+
+      # keep the run record + validation report as CI artifacts so a
+      # reviewer can inspect what the build actually did
+      - name: Upload run record
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: run-record
+          path: |
+            build/run.json
+            outputs/validation_report.json
+            data/manifest.json

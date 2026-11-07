@@ -1,0 +1,28 @@
+{
+  "baseline": "known_violations.json",
+  "checks": {
+    "duplicate_keys": {
+      "sample_new": [],
+      "violations_known": 0,
+      "violations_new": 0
+    },
+    "implausible_durations": {
+      "sample_new": [],
+      "violations_known": 0,
+      "violations_new": 0
+    },
+    "impossible_negatives": {
+      "sample_new": [],
+      "violations_known": 0,
+      "violations_new": 0
+    },
+    "quarters_vs_annual": {
+      "sample_new": [],
+      "violations_known": 3,
+      "violations_new": 0
+    }
+  },
+  "input": "/Users/ad/medications_exposure/reproducible-analysis/outputs/facts_clean.csv",
+  "rows": 1312,
+  "status": "PASS"
+}

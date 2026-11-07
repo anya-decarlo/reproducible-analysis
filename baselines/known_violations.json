@@ -1,0 +1,22 @@
+{
+  "quarters_vs_annual": [
+    {
+      "entity": "MICROSOFT CORP",
+      "metric": "net_income",
+      "fy_end": "2016-06-30",
+      "reason": "FY2016: quarterly figures pre-date Nokia-impairment-era adjustments included in the annual figure. Investigated 2026-11-06; documented source data quirk, not a pipeline bug."
+    },
+    {
+      "entity": "MICROSOFT CORP",
+      "metric": "operating_income",
+      "fy_end": "2016-06-30",
+      "reason": "Same FY2016 reporting gap as net_income; see above."
+    },
+    {
+      "entity": "MICROSOFT CORP",
+      "metric": "revenue",
+      "fy_end": "2016-06-30",
+      "reason": "Same FY2016 reporting gap; 6.4% exceeds tolerance but is consistent with the restatement-era filings."
+    }
+  ]
+}

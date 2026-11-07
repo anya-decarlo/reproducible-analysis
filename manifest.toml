@@ -1,0 +1,66 @@
+# Pipeline manifest — the documented list of transformations.
+# Every step names its script, inputs, outputs, and the rules it applies.
+# This file is the contract: a reviewer should be able to understand the
+# whole data flow from here without reading code.
+
+[pipeline]
+name = "edgar-annual-metrics"
+version = "0.1.0"
+seed = "n/a — no stochastic steps"
+
+[[step]]
+name = "ingest"
+script = "pipeline/ingest.py"
+inputs = ["SEC EDGAR companyfacts API (or --copy-from local cache)"]
+outputs = ["data/raw/CIK*_*.json", "data/manifest.json"]
+description = """
+Fetch each ticker's companyfacts payload. Records per-file sha256,
+byte size, and source URL in data/manifest.json — input provenance.
+Cached files are never refetched, so builds are offline-reproducible.
+"""
+
+[[step]]
+name = "transform"
+script = "pipeline/transform.py"
+inputs = ["data/raw/CIK*_*.json"]
+outputs = ["outputs/facts_clean.csv"]
+description = """
+T1 flatten JSON to one row per fact; T2 keep focus metrics via the
+tag->metric map (handles pre/post-2018 revenue tag split); T3 drop rows
+missing lineage fields; T4 drop malformed periods; T5 keep latest-filed
+per (entity, tag, unit, period) so amendments supersede originals.
+"""
+
+[[step]]
+name = "analyze"
+script = "pipeline/analyze.py"
+inputs = ["outputs/facts_clean.csv"]
+outputs = ["outputs/annual_metrics.csv", "outputs/yoy_growth.csv"]
+description = """
+Annual facts = 350-400 day durations. YoY computed on consecutive
+annual periods. All values rounded to fixed precision for
+byte-stable output.
+"""
+
+[[step]]
+name = "validate"
+script = "pipeline/validate.py"
+inputs = ["outputs/facts_clean.csv"]
+outputs = ["outputs/validation_report.json"]
+description = """
+Four data tests gate the build: duplicate keys, impossible negatives,
+implausible durations, quarters-vs-annual tie-out (±0.5%). Any
+violation fails the run — the report records what was checked and what
+failed.
+"""
+
+[[step]]
+name = "verify"
+script = "pipeline/verify.py"
+inputs = ["data/raw/*.json", "outputs/*.csv"]
+outputs = ["stdout verdict"]
+description = """
+Recomputes all CSV outputs from the recorded inputs in a scratch dir
+and compares sha256s. Byte-identical = reproducible. Provenance files
+(run record, manifest) are excluded — timestamps are metadata.
+"""

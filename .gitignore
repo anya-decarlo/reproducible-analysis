@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+.DS_Store
+# raw payloads are large & re-fetchable; their hashes are committed in
+# data/manifest.json instead
+data/raw/*.json
+# outputs/ and build/ are COMMITTED: diffable outputs are what make
+# data changes reviewable in PRs

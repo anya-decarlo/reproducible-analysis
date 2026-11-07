@@ -1,0 +1,80 @@
+{
+  "git_sha": "nogit",
+  "python": "CPython 3.15.0",
+  "steps": [
+    {
+      "elapsed_s": 0.023,
+      "finished_utc": "2026-11-07T18:21:07Z",
+      "inputs": {
+        "CIK0000320193_AAPL.json": "918719c14ea66b5c78e0da7daed5ff8a62fab20c19ec37e74615e2b2233eae74",
+        "CIK0000789019_MSFT.json": "11071048a9cf1d23d9804f1a1c18783e8a6d50586e857c1e8a8bcce9081ddad6"
+      },
+      "meta": {},
+      "outputs": {
+        "manifest.json": "767beee57bdf543f1ca15b2e4f76d448356841a73c65c2c59cf370a76e1da554"
+      },
+      "step": "ingest"
+    },
+    {
+      "elapsed_s": 0.061,
+      "finished_utc": "2026-11-07T18:21:07Z",
+      "inputs": {
+        "CIK0000320193_AAPL.json": "918719c14ea66b5c78e0da7daed5ff8a62fab20c19ec37e74615e2b2233eae74",
+        "CIK0000789019_MSFT.json": "11071048a9cf1d23d9804f1a1c18783e8a6d50586e857c1e8a8bcce9081ddad6"
+      },
+      "meta": {
+        "deduped": 2047,
+        "dropped": {
+          "bad_period": 0,
+          "no_lineage": 0
+        },
+        "rows_in": 3359,
+        "rows_out": 1312
+      },
+      "outputs": {
+        "facts_clean.csv": "e9cb0bde5664ea3889b7988b3f858114b50ad0127030890b51ff76981ab31052"
+      },
+      "step": "transform"
+    },
+    {
+      "elapsed_s": 0.004,
+      "finished_utc": "2026-11-07T18:21:07Z",
+      "inputs": {
+        "facts_clean.csv": "e9cb0bde5664ea3889b7988b3f858114b50ad0127030890b51ff76981ab31052"
+      },
+      "meta": {
+        "annual_rows": 164,
+        "yoy_rows": 156
+      },
+      "outputs": {
+        "annual_metrics.csv": "e8b9d9cddce176ecfbdb74d180d8d4bf099f467fad3c0a3e19cdc93007b87e82",
+        "yoy_growth.csv": "d3baf478ef88e7c895d2078f67275630ede41f97fd4752faac7e7e8ea2048c87"
+      },
+      "step": "analyze"
+    },
+    {
+      "elapsed_s": 0.007,
+      "finished_utc": "2026-11-07T18:21:07Z",
+      "inputs": {
+        "facts_clean.csv": "e9cb0bde5664ea3889b7988b3f858114b50ad0127030890b51ff76981ab31052"
+      },
+      "meta": {},
+      "outputs": {
+        "validation_report.json": "ed0e48a783b973ed252691abfd20fb3b61e0e4b1bb3faa70320613fa9d298038"
+      },
+      "step": "validate"
+    },
+    {
+      "elapsed_s": 0.008,
+      "finished_utc": "2026-11-07T18:40:17Z",
+      "inputs": {
+        "facts_clean.csv": "e9cb0bde5664ea3889b7988b3f858114b50ad0127030890b51ff76981ab31052"
+      },
+      "meta": {},
+      "outputs": {
+        "validation_report.json": "34783af0a8d8fdde28d3843a606b44a212b725b9c07210807cc72eb91fd8f2df"
+      },
+      "step": "validate"
+    }
+  ]
+}
