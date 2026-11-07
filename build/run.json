@@ -75,6 +75,82 @@
         "validation_report.json": "34783af0a8d8fdde28d3843a606b44a212b725b9c07210807cc72eb91fd8f2df"
       },
       "step": "validate"
+    },
+    {
+      "elapsed_s": 0.783,
+      "finished_utc": "2026-11-07T18:44:24Z",
+      "inputs": {
+        "CIK0000320193_AAPL.json": "918719c14ea66b5c78e0da7daed5ff8a62fab20c19ec37e74615e2b2233eae74",
+        "CIK0000789019_MSFT.json": "11071048a9cf1d23d9804f1a1c18783e8a6d50586e857c1e8a8bcce9081ddad6",
+        "CIK0001318605_TSLA.json": "f6222c3c5b8a39c5fe2c0d3fe4fc8966ddaf1e57dc5082631ddf61350aebaea5"
+      },
+      "meta": {},
+      "outputs": {
+        "manifest.json": "ff69e25acc9e9f04f12c07f59b1e3797035f6a259a24a4cf709b0de931802510"
+      },
+      "step": "ingest"
+    },
+    {
+      "elapsed_s": 0.09,
+      "finished_utc": "2026-11-07T18:44:25Z",
+      "inputs": {
+        "CIK0000320193_AAPL.json": "918719c14ea66b5c78e0da7daed5ff8a62fab20c19ec37e74615e2b2233eae74",
+        "CIK0000789019_MSFT.json": "11071048a9cf1d23d9804f1a1c18783e8a6d50586e857c1e8a8bcce9081ddad6",
+        "CIK0001318605_TSLA.json": "f6222c3c5b8a39c5fe2c0d3fe4fc8966ddaf1e57dc5082631ddf61350aebaea5"
+      },
+      "meta": {
+        "deduped": 2827,
+        "dropped": {
+          "bad_period": 0,
+          "no_lineage": 0
+        },
+        "rows_in": 4698,
+        "rows_out": 1871
+      },
+      "outputs": {
+        "facts_clean.csv": "5cff83afbf608ae6225f1f3612af19a9d40225414c90b60a322439a84af0e8be"
+      },
+      "step": "transform"
+    },
+    {
+      "elapsed_s": 0.005,
+      "finished_utc": "2026-11-07T18:44:25Z",
+      "inputs": {
+        "facts_clean.csv": "5cff83afbf608ae6225f1f3612af19a9d40225414c90b60a322439a84af0e8be"
+      },
+      "meta": {
+        "annual_rows": 232,
+        "yoy_rows": 220
+      },
+      "outputs": {
+        "annual_metrics.csv": "684680668303e4531a8b34bef03760dc812571df0e89391d6b8f8d2bc1d126ba",
+        "yoy_growth.csv": "57647168aa77dd52fe76ec6367a1c3d6995fdf688e95557500d88c5367f797e4"
+      },
+      "step": "analyze"
+    },
+    {
+      "elapsed_s": 0.012,
+      "finished_utc": "2026-11-07T18:44:25Z",
+      "inputs": {
+        "facts_clean.csv": "5cff83afbf608ae6225f1f3612af19a9d40225414c90b60a322439a84af0e8be"
+      },
+      "meta": {},
+      "outputs": {
+        "validation_report.json": "eb09f178d607342fa989cad8c426a3e7b55f2603075656c51b51304f7bc8ffb2"
+      },
+      "step": "validate"
+    },
+    {
+      "elapsed_s": 0.011,
+      "finished_utc": "2026-11-07T18:45:32Z",
+      "inputs": {
+        "facts_clean.csv": "5cff83afbf608ae6225f1f3612af19a9d40225414c90b60a322439a84af0e8be"
+      },
+      "meta": {},
+      "outputs": {
+        "validation_report.json": "8c3bdbadb4fbcd2847855ee9b1df3947727a1186ff9400166b9a84c1c52f864a"
+      },
+      "step": "validate"
     }
   ]
 }
