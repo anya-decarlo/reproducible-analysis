@@ -55,16 +55,30 @@ def check_durations(rows):
 
 
 def check_quarters_tie(rows):
-    """Four quarter-length facts must sum to the annual figure ±0.5%."""
-    ann = [r for r in rows if r["duration_days"]
-           and FY_DAYS[0] <= int(r["duration_days"]) <= FY_DAYS[1]]
-    qtr = [r for r in rows if r["duration_days"]
-           and Q_DAYS[0] <= int(r["duration_days"]) <= Q_DAYS[1]]
+    """Four quarter-length facts must sum to the annual figure ±0.5%.
+
+    Facts are deduped to one per period at the canonical metric level —
+    the same quarter reported under two tag variants (Revenues vs
+    RevenueFromContractWithCustomer…) must not count twice.
+    """
+    def per_period(rows_):
+        best = {}
+        for r in rows_:
+            k = (r["entity"], r["metric"], r["unit"], r["start"], r["end"])
+            if k not in best or (r["filed"], r["accn"]) > (
+                    best[k]["filed"], best[k]["accn"]):
+                best[k] = r
+        return best
+
+    ann = per_period(r for r in rows if r["duration_days"]
+                     and FY_DAYS[0] <= int(r["duration_days"]) <= FY_DAYS[1])
+    qtr = per_period(r for r in rows if r["duration_days"]
+                     and Q_DAYS[0] <= int(r["duration_days"]) <= Q_DAYS[1])
     out = []
-    for a in ann:
+    for a in ann.values():
         if a["metric"] not in ("revenue", "net_income", "operating_income"):
             continue
-        qs = [q for q in qtr
+        qs = [q for q in qtr.values()
               if q["entity"] == a["entity"] and q["metric"] == a["metric"]
               and q["unit"] == a["unit"]
               and a["start"] <= q["start"] and q["end"] <= a["end"]]

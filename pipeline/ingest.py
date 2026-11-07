@@ -19,7 +19,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from pipeline.common import ROOT, RunRecord, sha256, write_json
 
-DEFAULT_TICKERS = ["AAPL", "MSFT"]
+DEFAULT_TICKERS = ["AAPL", "MSFT", "TSLA"]
 USER_AGENT = "reproducible-analysis contact@example.com"
 TICKERS_URL = "https://www.sec.gov/files/company_tickers.json"
 FACTS_URL = "https://data.sec.gov/api/xbrl/companyfacts/CIK{cik:010d}.json"
